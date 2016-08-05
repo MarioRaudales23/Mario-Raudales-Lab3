@@ -18,9 +18,9 @@ void calculadora();
 int main(){
 	int menu;
 	char resp;
-	cout<<"Menu\nOpcion 1:Laberinto\nOpcion 2:Calculadora\nDigite su eleccion: ";
-	cin>>menu;
 	do{
+		cout<<"Menu\nOpcion 1:Laberinto\nOpcion 2:Calculadora\nDigite su eleccion: ";
+		cin>>menu;
 		switch(menu){
 			case 1:
 				laberinto();
@@ -189,6 +189,12 @@ void calculadora(){
 			decimalabinario(numero);
 			break;
 		case 3:
+			int numero1,numero2;
+			cout<<"Ingrese el primer numero: ";
+			cin>>numero1;
+			cout<<"Ingrese el Segundo numero: ";
+			cin>>numero2;
+			sumadebinario(numero1,numero2);
 			break;
 	}
 }
@@ -220,9 +226,33 @@ void  decimalabinario(int numero){
 	}
 }
 
-void sumadebinarios(int,int){
-	int binario1[7],binario2[7];
-	for(int i=0;i<=7;i++){
-
+void sumadebinario(int numero1,int numero2){
+	int binario1[7],binario2[7],respuesta[7];
+	for(int i=7;i>=0;i--){
+		binario1[i] = numero1%2;
+		binario2[i] = numero2%2;
+		numero1/=2;
+		numero2/=2;
+	}
+	cout<<"Hola";
+	int carry = 0;
+	for(int i=7;i>=0;i--){
+		if(binario1[i] + binario2[i] + carry == 0){
+			respuesta[i] =  0;
+			carry = 0;
+		}else if(binario1[i] + binario2[i] + carry == 1){
+			respuesta[i] = 1;
+			carry = 0;
+		}else if(binario1[i] + binario2[i] + carry == 2){
+			respuesta[i] = 0;
+			carry = 1;
+		}else if(binario1[i] + binario2[i] + carry == 3){
+			respuesta[i] = 1;
+			carry = 1;
+		}
+	}
+	cout<<"La sumatoria es: ";
+	for(int i = 0;i<=7;i++){
+		cout<<respuesta[i];
 	}
 }
