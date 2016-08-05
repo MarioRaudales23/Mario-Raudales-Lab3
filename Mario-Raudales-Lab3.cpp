@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -10,6 +12,7 @@ void laberinto();
 void impresion(char**,int);
 void movimiento(char**,int );
 int continua(char**,int);
+void colocar(char**,int);
 
 int main(){
 	int menu;
@@ -59,7 +62,6 @@ void laberinto(){
 				}
 			}
 		}
-		impresion(matriz,tamano);
 		if(contadorsalida == 1 && contadorentrada == 1 && contadorcinco == 0){
 			movimiento(matriz,tamano);
 		}else{
@@ -82,7 +84,12 @@ void impresion(char** matriz,int tamano){
 }
 
 void movimiento(char** matriz,int tamano){
+	int puntaje = 0,turno = 0;
 	while(continua(matriz,tamano)){
+		if(turno == 5){
+			colocar(matriz,tamano);
+			turno = 0;
+		}
 		int x,y;
 		for(int i=0;i<tamano;i++){
 			for(int j=0;j<tamano;j++){
@@ -97,29 +104,52 @@ void movimiento(char** matriz,int tamano){
 		cout<<"Ingrese el movimiento: ";
 		cin>>letra;
 		if(letra == 'w'||letra == 'w'){
-			if(matriz[x+1][y] == '1'||matriz[x+1][y] == '3'){
-				matriz[x+1][y] = '2';
+			if(matriz[x-1][y] == '1'||matriz[x-1][y] == '3'||matriz[x-1][y] == '5'||matriz[x-1][y] == '*'){
+				matriz[x-1][y] = '2';
 				matriz[x][y]='x';
+				if(matriz[x-1][y] == '1'){
+					puntaje++;
+				}else if(matriz[x-1][y] == '5'){
+					puntaje-=5;
+				}
+				turno++;
 			}			
 		}else if(letra == 's'||letra == 'S'){
-			if(matriz[x-1][y] == '1'||matriz[x-1] == '3'){
-				matriz[x-1][y] = '2';
+			if(matriz[x+1][y] == '1'||matriz[x+1][y] == '3'||matriz[x+1][y] == '5'||matriz[x+1][y] == '*'){
+				matriz[x+1][y] = '2';
 				matriz[x][y] = '*';
+				if(matriz[x+1][y] == '1'){
+					puntaje++;
+				}else if(matriz[x+1][y] == '1'){
+					puntaje-=5;
+				}
+				turno++;
 			}
 		}else if(letra == 'd'||letra == 'D'){
-			cout<<"hola";
-			if(matriz[x][y+1] == '1'||matriz[x][y+1] == '3'){
-				cout<<"xy";
+			if(matriz[x][y+1] == '1'||matriz[x][y+1] == '3'||matriz[x][y+1] == '5'||matriz[x][y+1] == '*'){
 				matriz[x][y+1]='2';
 				matriz[x][y] = '*';
+				if(matriz[x][y+1] == '1'){
+					puntaje++;
+				}else if(matriz[x][y+1] == '5'){
+					puntaje-=5;
+				}
+				turno++;
 			}
 		}else if(letra == 'a'||letra == 'A'){
-			if(matriz[x][y-1] == '1'||matriz[x][y-1] == '3'){
+			if(matriz[x][y-1] == '1'||matriz[x][y-1] == '3'||matriz[x][y-1] == '5'||matriz[x][y-1] == '*'){
 				matriz[x][y-1] = '2';
 				matriz[x][y] = '*';
+				if(matriz[x][y-1]=='1'){
+					puntaje++;
+				}else if(matriz[x][y-1] == '5'){
+					puntaje -=5;
+				}
+				turno++;
 			}
 		}
 	}
+	cout<<"Ganador\nSu puntaje es: "<<puntaje;
 }
 
 
@@ -137,4 +167,8 @@ int continua(char** matriz,int tamano){
 	}else{
 		return false;
 	}
+}
+
+void colocar(char** matriz,int tamano){
+	
 }
