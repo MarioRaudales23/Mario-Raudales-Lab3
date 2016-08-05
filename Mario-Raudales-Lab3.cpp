@@ -5,9 +5,9 @@
 #include <math.h>
 using namespace std;
 
+void sumadebinario(int,int);
 int binarioadecimal(int);
-void decimalabinario(int);
-string suma(char[]);
+void  decimalabinario(int);
 void laberinto();
 void impresion(char**,int);
 void movimiento(char**,int );
@@ -209,13 +209,20 @@ int binarioadecimal(int binario){
 	return numero;
 }
 
-void decimalabinario(int numero){
-	int binario[7];
-	for(int i =0;i<=7;i++){
+void  decimalabinario(int numero){
+	int  binario[7];
+	for(int i =7;i>=0;i--){
 		binario[i] = numero%2;
 		numero=numero/2;
 	}
-	for(int i = 7;i>=0;i--){
+	for(int i = 0;i<=7;i++){
 		cout<<binario[i];
+	}
+}
+
+void sumadebinarios(int,int){
+	int binario1[7],binario2[7];
+	for(int i=0;i<=7;i++){
+
 	}
 }
