@@ -2,10 +2,10 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
-
+#include <math.h>
 using namespace std;
 
-string binarioadecimal(char[]);
+int binarioadecimal(int);
 string decimalabinario(char[]);
 string suma(char[]);
 void laberinto();
@@ -13,6 +13,7 @@ void impresion(char**,int);
 void movimiento(char**,int );
 int continua(char**,int);
 void colocar(char**,int);
+void calculadora();
 
 int main(){
 	int menu;
@@ -25,11 +26,12 @@ int main(){
 				laberinto();
 				break;
 			case 2:
+				calculadora();
 				break;
 			default:
 				cout<<"Opcion no valida";
 		}
-		cout<<"Desea continuar";
+		cout<<"Desea continuar: ";
 		cin>>resp;
 	}while(resp == 's' || resp == 'S');
 }
@@ -37,7 +39,7 @@ int main(){
 
 void laberinto(){
 	int tamano;
-	cout <<"Ingrese el tamano del laberinto";
+	cout <<"Ingrese el tamano del laberinto: ";
 	cin>>tamano;
 	if(tamano<10){
 		cout<<"Tamano no valido";
@@ -65,7 +67,7 @@ void laberinto(){
 		if(contadorsalida == 1 && contadorentrada == 1 && contadorcinco == 0){
 			movimiento(matriz,tamano);
 		}else{
-			cout<<"Ingrese un numero no valido O mas de una salida o entrada";
+			cout<<"\nIngrese un numero no valido O mas de una salida o entrada.";
 		}
 		for(int i=0;i<tamano;i++){
 			delete[] matriz[i];
@@ -169,6 +171,36 @@ int continua(char** matriz,int tamano){
 	}
 }
 
+void calculadora(){
+	int menu;
+	cout<<"Opcion 1:Binario-Decimal\nOpcion 2:Decimal-Binario\nOpcion 3:Suma Binario\nDigite su eleccion: ";
+	cin>>menu;
+	switch(menu){
+		case 1:
+			int binario;
+			cout<<"Ingrese el numero binario: ";
+			cin>>binario;
+			cout<<"El numero cambiado es: "<<binarioadecimal(binario);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+	}
+}
 void colocar(char** matriz,int tamano){
 	
+}
+
+int binarioadecimal(int binario){
+	int potencia,numero;
+	while(binario >= 10){
+		if(binario%10 == 1)
+			numero+=pow(2,potencia);
+			binario = binario/10;
+			potencia++;
+	}
+	if(binario%10==1)
+		numero+=pow(2,potencia);
+	return numero;
 }
