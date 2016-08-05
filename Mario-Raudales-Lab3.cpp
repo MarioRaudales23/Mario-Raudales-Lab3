@@ -6,7 +6,7 @@
 using namespace std;
 
 int binarioadecimal(int);
-string decimalabinario(char[]);
+void decimalabinario(int);
 string suma(char[]);
 void laberinto();
 void impresion(char**,int);
@@ -183,6 +183,10 @@ void calculadora(){
 			cout<<"El numero cambiado es: "<<binarioadecimal(binario);
 			break;
 		case 2:
+			int numero;
+			cout<<"Ingrese el numero a convertir: ";
+			cin>>numero;
+			decimalabinario(numero);
 			break;
 		case 3:
 			break;
@@ -203,4 +207,15 @@ int binarioadecimal(int binario){
 	if(binario%10==1)
 		numero+=pow(2,potencia);
 	return numero;
+}
+
+void decimalabinario(int numero){
+	int binario[7];
+	for(int i =0;i<=7;i++){
+		binario[i] = numero%2;
+		numero=numero/2;
+	}
+	for(int i = 7;i>=0;i--){
+		cout<<binario[i];
+	}
 }
