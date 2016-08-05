@@ -8,6 +8,8 @@ string decimalabinario(char[]);
 string suma(char[]);
 void laberinto();
 void impresion(char**,int);
+void movimiento(char**,int );
+int continua(char**,int);
 
 int main(){
 	int menu;
@@ -59,7 +61,7 @@ void laberinto(){
 		}
 		impresion(matriz,tamano);
 		if(contadorsalida == 1 && contadorentrada == 1 && contadorcinco == 0){
-			
+			movimiento(matriz,tamano);
 		}else{
 			cout<<"Ingrese un numero no valido O mas de una salida o entrada";
 		}
@@ -76,5 +78,63 @@ void impresion(char** matriz,int tamano){
 			cout<<"["<<matriz[i][j]<<"]";
 		}
 		cout<<endl;
+	}
+}
+
+void movimiento(char** matriz,int tamano){
+	while(continua(matriz,tamano)){
+		int x,y;
+		for(int i=0;i<tamano;i++){
+			for(int j=0;j<tamano;j++){
+				if(matriz[i][j] == '2'){
+					x = i;
+					y = j;
+				}
+			}
+		}
+		impresion(matriz,tamano);
+		char letra;
+		cout<<"Ingrese el movimiento: ";
+		cin>>letra;
+		if(letra == 'w'||letra == 'w'){
+			if(matriz[x+1][y] == '1'||matriz[x+1][y] == '3'){
+				matriz[x+1][y] = '2';
+				matriz[x][y]='x';
+			}			
+		}else if(letra == 's'||letra == 'S'){
+			if(matriz[x-1][y] == '1'||matriz[x-1] == '3'){
+				matriz[x-1][y] = '2';
+				matriz[x][y] = '*';
+			}
+		}else if(letra == 'd'||letra == 'D'){
+			cout<<"hola";
+			if(matriz[x][y+1] == '1'||matriz[x][y+1] == '3'){
+				cout<<"xy";
+				matriz[x][y+1]='2';
+				matriz[x][y] = '*';
+			}
+		}else if(letra == 'a'||letra == 'A'){
+			if(matriz[x][y-1] == '1'||matriz[x][y-1] == '3'){
+				matriz[x][y-1] = '2';
+				matriz[x][y] = '*';
+			}
+		}
+	}
+}
+
+
+int continua(char** matriz,int tamano){
+	int haysalida = 0;
+	for(int i= 0;i<tamano;i++){
+		for(int j = 0;j<tamano;j++){
+			if(matriz[i][j] == '3'){
+				haysalida++;
+			}
+		}
+	}
+	if(haysalida == 1){
+		return true;
+	}else{
+		return false;
 	}
 }
