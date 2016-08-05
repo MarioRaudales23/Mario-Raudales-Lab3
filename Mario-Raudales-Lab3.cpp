@@ -3,15 +3,17 @@
 
 using namespace std;
 
-char[] binarioadecimal(char[]);
-char[] decimalabinario(char[]);
-char[] suma(char[]);
+string binarioadecimal(char[]);
+string decimalabinario(char[]);
+string suma(char[]);
 void laberinto();
+void impresion(char**,int);
 
 int main(){
 	int menu;
 	char resp;
 	cout<<"Menu\nOpcion 1:Laberinto\nOpcion 2:Calculadora\nDigite su eleccion: ";
+	cin>>menu;
 	do{
 		switch(menu){
 			case 1:
@@ -20,7 +22,7 @@ int main(){
 			case 2:
 				break;
 			default:
-				cout<<"Opcion no valida"
+				cout<<"Opcion no valida";
 		}
 		cout<<"Desea continuar";
 		cin>>resp;
@@ -44,18 +46,19 @@ void laberinto(){
 		for(int i = 0;i<tamano;i++){
 			cout<<"Ingrese la fila"<<i<<": ";
 			cin>>fila;
-			for(int j = 0;j < tamano;j++;){
+			for(int j = 0;j < tamano;j++){
 				matriz[i][j] = fila[j];
-				if(fila[j] == "3"){
+				if(fila[j] == '3'){
 					contadorsalida++;
-				}else if(fila[j] == "2"){
+				}else if(fila[j] == '2'){
 					contadorentrada++;
-				}else if(fila[j] == "5"){
+				}else if(fila[j] == '5'){
 					contadorcinco++;
 				}
 			}
 		}
-		if(contadorsalida == 1 && contadorentrada == 1 && contadorcinco){
+		impresion(matriz,tamano);
+		if(contadorsalida == 1 && contadorentrada == 1 && contadorcinco == 0){
 			
 		}else{
 			cout<<"Ingrese un numero no valido O mas de una salida o entrada";
@@ -67,4 +70,11 @@ void laberinto(){
 	}
 }
 
-
+void impresion(char** matriz,int tamano){
+	for(int i = 0;i<tamano;i++){
+		for(int j = 0;j<tamano;j++){
+			cout<<"["<<matriz[i][j]<<"]";
+		}
+		cout<<endl;
+	}
+}
