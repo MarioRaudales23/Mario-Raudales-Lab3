@@ -33,7 +33,7 @@ int main(){
 			default:
 				cout<<"Opcion no valida";
 		}
-		cout<<"Desea continuar: ";
+		cout<<"Desea continuar[s/n]: ";
 		cin>>resp;
 	}while(resp == 's' || resp == 'S');
 }
@@ -201,10 +201,10 @@ void calculadora(){
 	}
 }
 void colocar(char** matriz,int tamano){
-	for(int i =0;i<tamano;i++){
-		for(int j=0;j<tamano;j++){
+	for(int i =tamano-1;i>=0;i--){
+		for(int j=tamano-1;j>=0;j--){
 			if(matriz[i][j] == '1'){
-				matriz[i][j] == 5;
+				matriz[i][j] == '5';
 				break;
 			}
 		}
