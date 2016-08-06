@@ -15,6 +15,8 @@ int continua(char**,int);
 void colocar(char**,int);
 void calculadora();
 
+int bandera = 0;
+
 int main(){
 	int menu;
 	char resp;
@@ -106,47 +108,47 @@ void movimiento(char** matriz,int tamano){
 		cout<<"Ingrese el movimiento: ";
 		cin>>letra;
 		if(letra == 'w'||letra == 'w'){
-			if(matriz[x-1][y] == '1'||matriz[x-1][y] == '3'||matriz[x-1][y] == '5'||matriz[x-1][y] == '*'){
-				matriz[x-1][y] = '2';
-				matriz[x][y]='x';
+			if(matriz[x-1][y] == '1'||matriz[x-1][y] == '3'||matriz[x-1][y] == '5'||matriz[x-1][y] == '*'){			
 				if(matriz[x-1][y] == '1'){
 					puntaje++;
 				}else if(matriz[x-1][y] == '5'){
 					puntaje-=5;
 				}
+				matriz[x][y] = '*';
+				matriz[x-1][y] = '2';
 				turno++;
 			}			
 		}else if(letra == 's'||letra == 'S'){
 			if(matriz[x+1][y] == '1'||matriz[x+1][y] == '3'||matriz[x+1][y] == '5'||matriz[x+1][y] == '*'){
-				matriz[x+1][y] = '2';
-				matriz[x][y] = '*';
 				if(matriz[x+1][y] == '1'){
 					puntaje++;
 				}else if(matriz[x+1][y] == '1'){
 					puntaje-=5;
 				}
+				matriz[x+1][y] = '2';
+				matriz[x][y] = '*';
 				turno++;
 			}
 		}else if(letra == 'd'||letra == 'D'){
 			if(matriz[x][y+1] == '1'||matriz[x][y+1] == '3'||matriz[x][y+1] == '5'||matriz[x][y+1] == '*'){
-				matriz[x][y+1]='2';
-				matriz[x][y] = '*';
 				if(matriz[x][y+1] == '1'){
 					puntaje++;
 				}else if(matriz[x][y+1] == '5'){
 					puntaje-=5;
 				}
+				matriz[x][y+1] = '2';
+				matriz[x][y] = '*';
 				turno++;
 			}
 		}else if(letra == 'a'||letra == 'A'){
 			if(matriz[x][y-1] == '1'||matriz[x][y-1] == '3'||matriz[x][y-1] == '5'||matriz[x][y-1] == '*'){
-				matriz[x][y-1] = '2';
-				matriz[x][y] = '*';
 				if(matriz[x][y-1]=='1'){
 					puntaje++;
 				}else if(matriz[x][y-1] == '5'){
 					puntaje -=5;
 				}
+				matriz[x][y-1] = '2';
+				matriz[x][y] = '*';
 				turno++;
 			}
 		}
@@ -199,7 +201,14 @@ void calculadora(){
 	}
 }
 void colocar(char** matriz,int tamano){
-	
+	for(int i =0;i<tamano;i++){
+		for(int j=0;j<tamano;j++){
+			if(matriz[i][j] == '1'){
+				matriz[i][j] == 5;
+				break;
+			}
+		}
+	}
 }
 
 int binarioadecimal(int binario){
